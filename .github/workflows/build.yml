@@ -14,37 +14,26 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, ubuntu-24.04,
-             macos-14, macos-15, macos-26,
+             macos-15, macos-26,
              windows-2025, windows-2022]
         solver: [z3-4.12.1, z3-4.12.6, z3-4.14.1, z3-4.16.0]
         arch: [x64]
         exclude:
-          - os: macos-14
-            solver: z3-4.16.0
           - os: ubuntu-22.04
             solver: z3-4.16.0
         include:
-          - os: macos-14
-            arch: arm64
-            solver: z3-4.12.1
           - os: macos-15
             arch: arm64
             solver: z3-4.12.1
           - os: macos-26
             arch: arm64
             solver: z3-4.12.1
-          - os: macos-14
-            arch: arm64
-            solver: z3-4.12.6
           - os: macos-15
             arch: arm64
             solver: z3-4.12.6
           - os: macos-26
             arch: arm64
             solver: z3-4.12.6
-          - os: macos-14
-            arch: arm64
-            solver: z3-4.14.1
           - os: macos-15
             arch: arm64
             solver: z3-4.14.1
