@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: "${{ contains(matrix.os, 'macos') && !contains(matrix.os, 'windows') && !(contains(matrix.os, 'ubuntu') || contains(matrix.os, 'linux')) && 'ai-fleet-unrouted-macos' || contains(matrix.os, 'windows') && !contains(matrix.os, 'macos') && !(contains(matrix.os, 'ubuntu') || contains(matrix.os, 'linux')) && !contains(matrix.os, 'arm') && 'ai-fleet-unrouted-windows' || (contains(matrix.os, 'ubuntu') || contains(matrix.os, 'linux')) && !contains(matrix.os, 'windows') && !contains(matrix.os, 'macos') && !contains(matrix.os, 'arm') && 'ai-fleet-amd64' || 'ai-fleet-unrouted' }}"
     strategy:
       fail-fast: false
       matrix:
