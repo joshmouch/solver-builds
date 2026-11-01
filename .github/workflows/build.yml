@@ -9,42 +9,31 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: "${{ contains(matrix.os, 'macos') && !contains(matrix.os, 'windows') && !(contains(matrix.os, 'ubuntu') || contains(matrix.os, 'linux')) && 'ai-fleet-unrouted-macos' || contains(matrix.os, 'windows') && !contains(matrix.os, 'macos') && !(contains(matrix.os, 'ubuntu') || contains(matrix.os, 'linux')) && !contains(matrix.os, 'arm') && 'ai-fleet-unrouted-windows' || (contains(matrix.os, 'ubuntu') || contains(matrix.os, 'linux')) && !contains(matrix.os, 'windows') && !contains(matrix.os, 'macos') && !contains(matrix.os, 'arm') && 'ai-fleet-amd64' || 'ai-fleet-unrouted' }}"
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, ubuntu-24.04,
-             macos-14, macos-15, macos-26,
+             macos-15, macos-26,
              windows-2025, windows-2022]
         solver: [z3-4.12.1, z3-4.12.6, z3-4.14.1, z3-4.16.0]
         arch: [x64]
         exclude:
-          - os: macos-14
-            solver: z3-4.16.0
           - os: ubuntu-22.04
             solver: z3-4.16.0
         include:
-          - os: macos-14
-            arch: arm64
-            solver: z3-4.12.1
           - os: macos-15
             arch: arm64
             solver: z3-4.12.1
           - os: macos-26
             arch: arm64
             solver: z3-4.12.1
-          - os: macos-14
-            arch: arm64
-            solver: z3-4.12.6
           - os: macos-15
             arch: arm64
             solver: z3-4.12.6
           - os: macos-26
             arch: arm64
             solver: z3-4.12.6
-          - os: macos-14
-            arch: arm64
-            solver: z3-4.14.1
           - os: macos-15
             arch: arm64
             solver: z3-4.14.1
